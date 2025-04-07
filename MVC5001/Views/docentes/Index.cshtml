@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MVC5001.Models.docentes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <h2 class="text-center mb-4">Lista de Docentes</h2>
+
+    <!-- Botón para crear nuevo docente -->
+    <p>
+        @Html.ActionLink("Crear Nuevo Docente", "Create", new { @class = "btn btn-success" })
+    </p>
+
+    <!-- Tabla de docentes -->
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreCompleto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CorreoElectronico)
+                </th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CorreoElectronico)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.clave }, new { @class = "btn btn-warning btn-sm" }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.clave }, new { @class = "btn btn-info btn-sm" }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.clave }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

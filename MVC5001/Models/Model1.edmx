@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alumnos">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="bigint" Nullable="false" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="10" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="calificaciones">
+          <Key>
+            <PropertyRef Name="Idc" />
+          </Key>
+          <Property Name="Idc" Type="int" Nullable="false" />
+          <Property Name="Matricula" Type="bigint" />
+          <Property Name="Clave" Type="smallint" />
+          <Property Name="Parcial1" Type="int" />
+          <Property Name="Parcial2" Type="int" />
+          <Property Name="parcial3" Type="int" />
+        </EntityType>
+        <EntityType Name="docentes">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="smallint" Nullable="false" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="10" />
+          <Property Name="Telefono" Type="varchar" MaxLength="10" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="fk_calificaciones_alumnos">
+          <End Role="alumnos" Type="Self.alumnos" Multiplicity="0..1" />
+          <End Role="calificaciones" Type="Self.calificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alumnos">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="calificaciones">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_calificaciones_docentes">
+          <End Role="docentes" Type="Self.docentes" Multiplicity="0..1" />
+          <End Role="calificaciones" Type="Self.calificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="docentes">
+              <PropertyRef Name="clave" />
+            </Principal>
+            <Dependent Role="calificaciones">
+              <PropertyRef Name="Clave" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="alumnos" EntityType="Self.alumnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="calificaciones" EntityType="Self.calificaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="docentes" EntityType="Self.docentes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_calificaciones_alumnos" Association="Self.fk_calificaciones_alumnos">
+            <End Role="alumnos" EntitySet="alumnos" />
+            <End Role="calificaciones" EntitySet="calificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_calificaciones_docentes" Association="Self.fk_calificaciones_docentes">
+            <End Role="docentes" EntitySet="docentes" />
+            <End Role="calificaciones" EntitySet="calificaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alumnos">
+          <Key>
+            <PropertyRef Name="Matricula" />
+          </Key>
+          <Property Name="Matricula" Type="Int64" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="calificaciones" Relationship="Self.fk_calificaciones_alumnos" FromRole="alumnos" ToRole="calificaciones" />
+        </EntityType>
+        <EntityType Name="calificaciones">
+          <Key>
+            <PropertyRef Name="Idc" />
+          </Key>
+          <Property Name="Idc" Type="Int32" Nullable="false" />
+          <Property Name="Matricula" Type="Int64" />
+          <Property Name="Clave" Type="Int16" />
+          <Property Name="Parcial1" Type="Int32" />
+          <Property Name="Parcial2" Type="Int32" />
+          <Property Name="parcial3" Type="Int32" />
+          <NavigationProperty Name="alumnos" Relationship="Self.fk_calificaciones_alumnos" FromRole="calificaciones" ToRole="alumnos" />
+          <NavigationProperty Name="docentes" Relationship="Self.fk_calificaciones_docentes" FromRole="calificaciones" ToRole="docentes" />
+        </EntityType>
+        <EntityType Name="docentes">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="Int16" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="calificaciones" Relationship="Self.fk_calificaciones_docentes" FromRole="docentes" ToRole="calificaciones" />
+        </EntityType>
+        <Association Name="fk_calificaciones_alumnos">
+          <End Role="alumnos" Type="Self.alumnos" Multiplicity="0..1" />
+          <End Role="calificaciones" Type="Self.calificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="alumnos">
+              <PropertyRef Name="Matricula" />
+            </Principal>
+            <Dependent Role="calificaciones">
+              <PropertyRef Name="Matricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_calificaciones_docentes">
+          <End Role="docentes" Type="Self.docentes" Multiplicity="0..1" />
+          <End Role="calificaciones" Type="Self.calificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="docentes">
+              <PropertyRef Name="clave" />
+            </Principal>
+            <Dependent Role="calificaciones">
+              <PropertyRef Name="Clave" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alumnos" EntityType="Self.alumnos" />
+          <EntitySet Name="calificaciones" EntityType="Self.calificaciones" />
+          <EntitySet Name="docentes" EntityType="Self.docentes" />
+          <AssociationSet Name="fk_calificaciones_alumnos" Association="Self.fk_calificaciones_alumnos">
+            <End Role="alumnos" EntitySet="alumnos" />
+            <End Role="calificaciones" EntitySet="calificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_calificaciones_docentes" Association="Self.fk_calificaciones_docentes">
+            <End Role="docentes" EntitySet="docentes" />
+            <End Role="calificaciones" EntitySet="calificaciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="alumnos">
+            <EntityTypeMapping TypeName="Database1Model.alumnos">
+              <MappingFragment StoreEntitySet="alumnos">
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="calificaciones">
+            <EntityTypeMapping TypeName="Database1Model.calificaciones">
+              <MappingFragment StoreEntitySet="calificaciones">
+                <ScalarProperty Name="Idc" ColumnName="Idc" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Parcial1" ColumnName="Parcial1" />
+                <ScalarProperty Name="Parcial2" ColumnName="Parcial2" />
+                <ScalarProperty Name="parcial3" ColumnName="parcial3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="docentes">
+            <EntityTypeMapping TypeName="Database1Model.docentes">
+              <MappingFragment StoreEntitySet="docentes">
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

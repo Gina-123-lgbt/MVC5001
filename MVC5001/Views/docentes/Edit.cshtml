@@ -1,0 +1,58 @@
+﻿@model MVC5001.Models.docentes
+
+@{
+    ViewBag.Title = "Editar Docente";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-lg p-4" style="width: 50%;">
+        <h2 class="text-center mb-4">Editar Docente</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4 class="text-center">Datos del Docente</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.clave)
+
+                <!-- Nombre Completo -->
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.NombreCompleto, new { @class = "form-label" })
+                    @Html.EditorFor(model => model.NombreCompleto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NombreCompleto, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Teléfono -->
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.Telefono, new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Correo Electrónico -->
+                <div class="form-group mb-3">
+                    @Html.LabelFor(model => model.CorreoElectronico, new { @class = "form-label" })
+                    @Html.EditorFor(model => model.CorreoElectronico, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CorreoElectronico, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- Botón de Guardar -->
+                <div class="d-grid gap-2 mt-3">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        }
+
+        <!-- Botón de Volver a la lista -->
+        <div class="text-center mt-3">
+            @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

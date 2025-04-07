@@ -1,0 +1,43 @@
+﻿@model MVC5001.Models.calificaciones
+
+@{
+    ViewBag.Title = "Detalles de Calificación";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Detalles de Calificación</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-center">Información Completa</h4>
+                    <hr />
+
+                    <dl class="row">
+                        <dt class="col-md-4 fw-bold">Parcial 1</dt>
+                        <dd class="col-md-8">@Html.DisplayFor(model => model.Parcial1)</dd>
+
+                        <dt class="col-md-4 fw-bold">Parcial 2</dt>
+                        <dd class="col-md-8">@Html.DisplayFor(model => model.Parcial2)</dd>
+
+                        <dt class="col-md-4 fw-bold">Parcial 3</dt>
+                        <dd class="col-md-8">@Html.DisplayFor(model => model.parcial3)</dd>
+
+                        <dt class="col-md-4 fw-bold">Alumno</dt>
+                        <dd class="col-md-8">@Html.DisplayFor(model => model.alumnos.NombreCompleto)</dd>
+
+                        <dt class="col-md-4 fw-bold">Docente</dt>
+                        <dd class="col-md-8">@Html.DisplayFor(model => model.docentes.NombreCompleto)</dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-between">
+                        @Html.ActionLink("Editar", "Edit", new { id = Model.Idc }, new { @class = "btn btn-warning btn-lg" })
+                        @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-outline-secondary btn-lg" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

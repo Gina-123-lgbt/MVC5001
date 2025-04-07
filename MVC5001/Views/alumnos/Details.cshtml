@@ -1,0 +1,39 @@
+﻿@model MVC5001.Models.alumnos
+
+@{
+    ViewBag.Title = "Detalles del Alumno";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-info text-white text-center">
+                    <h3 class="mb-0">Detalles del Alumno</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th class="bg-light">Nombre Completo</th>
+                                <td>@Html.DisplayFor(model => model.NombreCompleto)</td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Teléfono</th>
+                                <td>@Html.DisplayFor(model => model.Telefono)</td>
+                            </tr>
+                            <tr>
+                                <th class="bg-light">Correo Electrónico</th>
+                                <td>@Html.DisplayFor(model => model.CorreoElectronico)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.Matricula }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-outline-secondary" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

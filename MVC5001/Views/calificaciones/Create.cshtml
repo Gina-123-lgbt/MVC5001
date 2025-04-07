@@ -1,0 +1,70 @@
+﻿@model MVC5001.Models.calificaciones
+
+@{
+    ViewBag.Title = "Crear Calificación";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Crear Calificación</h3>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Idc, new { @class = "form-label fw-bold" })
+                            @Html.EditorFor(model => model.Idc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Idc, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Matricula, "Matricula", new { @class = "form-label fw-bold" })
+                            @Html.DropDownList("Matricula", null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Matricula, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Clave, "Clave", new { @class = "form-label fw-bold" })
+                            @Html.DropDownList("Clave", null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Parcial1, new { @class = "form-label fw-bold" })
+                            @Html.EditorFor(model => model.Parcial1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Parcial1, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Parcial2, new { @class = "form-label fw-bold" })
+                            @Html.EditorFor(model => model.Parcial2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Parcial2, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.parcial3, new { @class = "form-label fw-bold" })
+                            @Html.EditorFor(model => model.parcial3, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.parcial3, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success btn-lg">Crear</button>
+                            @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-outline-secondary btn-lg" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

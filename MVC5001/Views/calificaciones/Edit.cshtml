@@ -1,0 +1,81 @@
+﻿@model MVC5001.Models.calificaciones
+
+@{
+    ViewBag.Title = "Editar Calificación";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-success text-white text-center">
+                    <h3 class="mb-0">Editar Calificación</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-center">Actualiza la Información</h4>
+                    <hr />
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Idc)
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Matricula, "Matricula", htmlAttributes: new { @class = "col-md-3 col-form-label" })
+                            <div class="col-md-9">
+                                @Html.DropDownList("Matricula", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Matricula, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Clave, "Clave", htmlAttributes: new { @class = "col-md-3 col-form-label" })
+                            <div class="col-md-9">
+                                @Html.DropDownList("Clave", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Parcial1, "Parcial 1", htmlAttributes: new { @class = "col-md-3 col-form-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Parcial1, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Parcial1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Parcial2, "Parcial 2", htmlAttributes: new { @class = "col-md-3 col-form-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Parcial2, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Parcial2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.parcial3, "Parcial 3", htmlAttributes: new { @class = "col-md-3 col-form-label" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.parcial3, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.parcial3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-9 offset-md-3">
+                                <input type="submit" value="Guardar Cambios" class="btn btn-success btn-lg" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-outline-secondary btn-lg" })
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

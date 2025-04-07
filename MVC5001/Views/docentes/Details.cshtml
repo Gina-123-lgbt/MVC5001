@@ -1,0 +1,44 @@
+﻿@model MVC5001.Models.docentes
+
+@{
+    ViewBag.Title = "Detalles del Docente";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-lg p-4" style="width: 50%;">
+        <h2 class="text-center mb-4">Detalles del Docente</h2>
+
+        <div>
+            <h4 class="text-center">Información del Docente</h4>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.NombreCompleto)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.NombreCompleto)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Telefono)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.CorreoElectronico)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.CorreoElectronico)
+                </dd>
+            </dl>
+        </div>
+
+        <div class="text-center">
+            @Html.ActionLink("Editar", "Edit", new { id = Model.clave }, new { @class = "btn btn-warning btn-sm me-2" })
+            @Html.ActionLink("Volver a la lista", "Index", null, new { @class = "btn btn-secondary btn-sm" })
+        </div>
+    </div>
+</div>
